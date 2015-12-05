@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">BudgetKeeper</string>
+    <string name="action_settings">Settings</string>
+
+    <string-array name="type1Array">
+        <item>Food</item>
+        <item>Gas</item>
+        <item>Entertainment</item>
+        <item>Payroll</item>
+        <item>Bills</item>
+        <item>Misc</item>
+    </string-array>
+
+    <string-array name="type2Array">
+        <item>Phone</item>
+        <item>Insurance</item>
+        <item>Car Payment</item>
+        <item>Payroll</item>
+    </string-array>
+
+    <string-array name="type3Array">
+        <item>Weekly</item>
+        <item>BiWeekly</item>
+        <item>Monthly</item>
+    </string-array>
+
+</resources>
