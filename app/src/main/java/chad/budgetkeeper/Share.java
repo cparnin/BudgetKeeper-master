@@ -24,7 +24,6 @@ public class Share extends Activity implements View.OnClickListener
         sendBtn = (Button) findViewById(R.id.send);
         sendBtn.setOnClickListener(this);
     }
-//test
 
     /*  This is set up (I believe) to open the email app
         then attach the "database" in the email...I think
