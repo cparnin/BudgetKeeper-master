@@ -21,7 +21,7 @@ public class CreditsDebits extends Activity implements AdapterView.OnItemSelecte
     private EditText amount1Edit;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
+    protected void onCreate(Bundle savedInstanceState) throws NumberFormatException
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.credits_debits);
@@ -40,8 +40,14 @@ public class CreditsDebits extends Activity implements AdapterView.OnItemSelecte
 
         // EDIT TEXT FOR AMOUNT
         amount1Edit = (EditText) findViewById(R.id.amountEditText1);
-        amount1 = (TextView) findViewById(R.id.amount1);
+        /*amount1 = (TextView) findViewById(R.id.amount1);
         // store amount in database
+        try {
+            int Value = Integer.parseInt(amount1.getText().toString());
+        }
+        catch(NumberFormatException ex){
+            throw ex;
+        }*/
     }
 
     // CREDIT DEBIT RADIO BUTTON
@@ -55,6 +61,7 @@ public class CreditsDebits extends Activity implements AdapterView.OnItemSelecte
             case R.id.creditRadioButton1:
                 if (checked)
                     // send what user enters as a credit to database entry
+
                     break;
             case R.id.debitRadioButton1:
                 if (checked)

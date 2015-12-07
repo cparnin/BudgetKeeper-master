@@ -15,13 +15,22 @@ import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 
+import java.util.Calendar;
+
+import budgetkeeper.db.CheckingSource;
+import budgetkeeper.db.SavingSource;
+
 public class MainActivity extends AppCompatActivity implements OnClickListener
 {
     // clickable buttons to other activities
     private Button breakdownBtn, creditsDebitsBtn, recurringBtn, shareBtn;
     // display text views
     private TextView checkingBal, savingsBal;
-
+    //data sources for db
+    CheckingSource checkingsource;
+    SavingSource savingsource;
+    //calendar
+    Calendar cal=Calendar.getInstance();
 
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -68,6 +77,11 @@ public class MainActivity extends AppCompatActivity implements OnClickListener
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+
+        //instancing data source for db
+        checkingsource = new CheckingSource(this);
+        savingsource = new SavingSource(this);
+
     }
 
     @Override
@@ -160,5 +174,19 @@ public class MainActivity extends AppCompatActivity implements OnClickListener
         );
         AppIndex.AppIndexApi.end(client, viewAction);
         client.disconnect();
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        checkingsource.open();
+        savingsource.open();
+    }
+
+    @Override
+    protected void onPause(){
+        super.onPause();
+        checkingsource.close();
+        savingsource.close();
     }
 }

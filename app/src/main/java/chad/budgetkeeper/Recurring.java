@@ -51,6 +51,7 @@ public class Recurring extends Activity implements AdapterView.OnItemSelectedLis
         amount2Edit = (EditText) findViewById(R.id.amountEditText2);
         amount2 = (TextView) findViewById(R.id.amount2);
         // store amount in database
+        //int Value = Integer.parseInt(amount2.getText().toString());
     }
 
     // CREDIT DEBIT RADIO BUTTON
