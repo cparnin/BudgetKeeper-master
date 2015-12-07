@@ -221,4 +221,25 @@
             android:layout_alignParentStart="true"/>
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:paddingTop="30dp">
+
+        <Button
+            android:id="@+id/recurringBtn"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="1dp"
+            android:layout_weight="1"
+            android:background="#02ffeb"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="Submit"
+            android:textColor="gray"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
 </LinearLayout>
