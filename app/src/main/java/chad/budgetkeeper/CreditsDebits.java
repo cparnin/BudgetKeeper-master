@@ -5,26 +5,47 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
-public class CreditsDebits extends Activity implements AdapterView.OnItemSelectedListener
+public class CreditsDebits extends Activity implements AdapterView.OnItemSelectedListener,
+                                                        View.OnClickListener
 {
 
-    private RadioButton creditsRadio1, debitRadio1;
+    private RadioGroup radioGroup1;
     private Spinner spinner1;
     private TextView amount1;
     private EditText amount1Edit;
+    private Button submitBtn1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) throws NumberFormatException
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.credits_debits);
+
+        /* Initialize Radio Group and attach click handler */
+        radioGroup1 = (RadioGroup) findViewById(R.id.radioGroup1);
+        radioGroup1.clearCheck();
+
+        /* Attach CheckedChangeListener to radio group */
+        radioGroup1.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
+        {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId)
+            {
+                RadioButton rb = (RadioButton) group.findViewById(checkedId);
+                if (null != rb && checkedId > -1)
+                {
+                    Toast.makeText(CreditsDebits.this, rb.getText(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
 
         // SPINNER FOR DROP DOWN CHOICE
         spinner1 = (Spinner) findViewById(R.id.type1Spinner);
@@ -40,7 +61,8 @@ public class CreditsDebits extends Activity implements AdapterView.OnItemSelecte
 
         // EDIT TEXT FOR AMOUNT
         amount1Edit = (EditText) findViewById(R.id.amountEditText1);
-        /*amount1 = (TextView) findViewById(R.id.amount1);
+        amount1 = (TextView) findViewById(R.id.amount1);
+        /*
         // store amount in database
         try {
             int Value = Integer.parseInt(amount1.getText().toString());
@@ -48,26 +70,9 @@ public class CreditsDebits extends Activity implements AdapterView.OnItemSelecte
         catch(NumberFormatException ex){
             throw ex;
         }*/
-    }
 
-    // CREDIT DEBIT RADIO BUTTON
-    public void onRadioButtonClicked(View view)
-    {
-        // Is the button now checked?
-        boolean checked = ((RadioButton) view).isChecked();
-
-        // Check which radio button was clicked
-        switch(view.getId()) {
-            case R.id.creditRadioButton1:
-                if (checked)
-                    // send what user enters as a credit to database entry
-
-                    break;
-            case R.id.debitRadioButton1:
-                if (checked)
-                    // send what user enters as a debit to database entry
-                    break;
-        }
+        submitBtn1 = (Button)findViewById(R.id.creditDebitSubmit);
+        submitBtn1.setOnClickListener(this);
     }
 
     // WHAT WE SELECTED IN SPINNER
@@ -86,6 +91,36 @@ public class CreditsDebits extends Activity implements AdapterView.OnItemSelecte
     public void onNothingSelected(AdapterView<?> parent)
     {
         // Another interface callback
+    }
+
+    public void onClear(View v)
+    {
+        /* Clears all selected radio buttons to default */
+        radioGroup1.clearCheck();
+    }
+
+    public void onSubmit(View v)
+    {
+        RadioButton rb = (RadioButton) radioGroup1.findViewById(radioGroup1.getCheckedRadioButtonId());
+        Toast.makeText(CreditsDebits.this, rb.getText(), Toast.LENGTH_SHORT).show();
+    }
+
+    // click to corresponding activity
+    public void onClick(View view)
+    {
+
+        if (view.getId() == R.id.creditRadioButton1)
+        {
+           // do stuff
+        }
+        if (view.getId() == R.id.debitRadioButton1)
+        {
+            //do stuff
+        }
+        if (view.getId() == R.id.creditDebitSubmit)
+        {
+            // submit to database
+        }
     }
 
 }
