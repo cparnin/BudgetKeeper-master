@@ -81,6 +81,49 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:paddingBottom="20dp"
+        android:paddingTop="20dp">
+
+        <RadioGroup
+            android:id="@+id/radioGroup2"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RadioButton
+                android:id="@+id/checkingRadioButton1"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#ffffffff"
+                android:textSize="20sp"
+                android:text="Checking" />
+
+            <RadioButton
+                android:id="@+id/savingsRadioButton1"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#ffffffff"
+                android:textSize="20sp"
+                android:text="Savings" />
+        </RadioGroup>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:background="@android:color/black"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
         android:paddingTop="25dp"
         android:paddingBottom="25dp">
 
@@ -146,14 +189,13 @@
             android:layout_height="match_parent"
             android:gravity="left"
             android:paddingRight="27.25dp"
-            android:text="$$"
-            android:inputType="number"
             android:textColor="#ffffffff"
             android:textSize="20sp"
             android:textStyle="bold"
             android:paddingLeft="20dp"
             android:paddingTop="20dp"
-            android:paddingBottom="30dp"/>
+            android:paddingBottom="30dp"
+            android:inputType="numberDecimal"/>
     </LinearLayout>
 
     <LinearLayout

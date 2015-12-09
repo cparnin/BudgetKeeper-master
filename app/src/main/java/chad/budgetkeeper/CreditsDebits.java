@@ -17,7 +17,7 @@ public class CreditsDebits extends Activity implements AdapterView.OnItemSelecte
                                                         View.OnClickListener
 {
 
-    private RadioGroup radioGroup1;
+    private RadioGroup radioGroup1, radioGroup2;
     private Spinner spinner1;
     private TextView amount1;
     private EditText amount1Edit;
@@ -29,9 +29,12 @@ public class CreditsDebits extends Activity implements AdapterView.OnItemSelecte
         super.onCreate(savedInstanceState);
         setContentView(R.layout.credits_debits);
 
-        /* Initialize Radio Group and attach click handler */
+        /* Initialize Radio Groups and attach click handler */
         radioGroup1 = (RadioGroup) findViewById(R.id.radioGroup1);
         radioGroup1.clearCheck();
+
+        radioGroup2 = (RadioGroup) findViewById(R.id.radioGroup2);
+        radioGroup2.clearCheck();
 
         /* Attach CheckedChangeListener to radio group */
         radioGroup1.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
@@ -46,6 +49,20 @@ public class CreditsDebits extends Activity implements AdapterView.OnItemSelecte
                 }
             }
         });
+
+        radioGroup2.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
+        {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId)
+            {
+                RadioButton rb = (RadioButton) group.findViewById(checkedId);
+                if (null != rb && checkedId > -1)
+                {
+                    Toast.makeText(CreditsDebits.this, rb.getText(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
 
         // SPINNER FOR DROP DOWN CHOICE
         spinner1 = (Spinner) findViewById(R.id.type1Spinner);
@@ -97,12 +114,16 @@ public class CreditsDebits extends Activity implements AdapterView.OnItemSelecte
     {
         /* Clears all selected radio buttons to default */
         radioGroup1.clearCheck();
+        radioGroup2.clearCheck();
     }
 
     public void onSubmit(View v)
     {
-        RadioButton rb = (RadioButton) radioGroup1.findViewById(radioGroup1.getCheckedRadioButtonId());
-        Toast.makeText(CreditsDebits.this, rb.getText(), Toast.LENGTH_SHORT).show();
+        RadioButton rb1 = (RadioButton) radioGroup1.findViewById(radioGroup1.getCheckedRadioButtonId());
+        Toast.makeText(CreditsDebits.this, rb1.getText(), Toast.LENGTH_SHORT).show();
+
+        RadioButton rb2 = (RadioButton) radioGroup2.findViewById(radioGroup2.getCheckedRadioButtonId());
+        Toast.makeText(CreditsDebits.this, rb2.getText(), Toast.LENGTH_SHORT).show();
     }
 
     // click to corresponding activity
@@ -117,9 +138,17 @@ public class CreditsDebits extends Activity implements AdapterView.OnItemSelecte
         {
             //do stuff
         }
+        if (view.getId() == R.id.checkingRadioButton1)
+        {
+            // do stuff
+        }
+        if (view.getId() == R.id.savingsRadioButton1)
+        {
+            //do stuff
+        }
         if (view.getId() == R.id.creditDebitSubmit)
         {
-            // submit to database
+            //do stuff
         }
     }
 

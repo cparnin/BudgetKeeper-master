@@ -43,7 +43,7 @@
         android:paddingBottom="20dp">
 
         <RadioGroup
-            android:id="@+id/radioGroup2"
+            android:id="@+id/radioGroup3"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -84,6 +84,48 @@
         android:paddingTop="20dp"
         android:paddingBottom="20dp">
 
+        <RadioGroup
+            android:id="@+id/radioGroup4"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RadioButton
+                android:id="@+id/checkingRadioButton2"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#ffffffff"
+                android:textSize="20sp"
+                android:text="Checking" />
+
+            <RadioButton
+                android:id="@+id/savingsRadioButton2"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#ffffffff"
+                android:textSize="20sp"
+                android:text="Savings" />
+        </RadioGroup>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:background="@android:color/black"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp">
+
         <TextView
             android:id="@+id/type2"
             android:layout_width="wrap_content"
@@ -121,8 +163,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:paddingTop="20dp"
-        android:paddingBottom="20dp">
+        >
 
         <TextView
             android:id="@+id/amount2"
@@ -144,14 +185,13 @@
             android:layout_height="match_parent"
             android:gravity="left"
             android:paddingRight="27.25dp"
-            android:text="$$"
             android:textColor="#ffffffff"
-            android:inputType="number"
             android:textSize="20sp"
             android:textStyle="bold"
             android:paddingLeft="20dp"
             android:paddingTop="20dp"
-            android:paddingBottom="30dp"/>
+            android:paddingBottom="30dp"
+            android:inputType="numberDecimal"/>
     </LinearLayout>
 
     <LinearLayout
@@ -169,7 +209,7 @@
         android:layout_width="fill_parent"
         android:layout_height="100dp"
         android:orientation="horizontal"
-        android:paddingTop="30dp">
+        android:paddingTop="10dp">
 
         <TextView
             android:id="@+id/howOften"
@@ -197,7 +237,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:paddingTop="10dp">
+        >
 
         <View
             android:layout_width="match_parent"
@@ -209,10 +249,10 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:paddingTop="20dp"
+        android:paddingTop="5dp"
         android:paddingRight="75dp"
         android:paddingLeft="75dp"
-        android:paddingBottom="20dp">
+        android:paddingBottom="5dp">
 
         <Button
             android:id="@+id/recurringSubmit"

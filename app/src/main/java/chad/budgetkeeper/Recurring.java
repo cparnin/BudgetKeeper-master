@@ -18,7 +18,7 @@ public class Recurring extends Activity implements AdapterView.OnItemSelectedLis
                                                     View.OnClickListener
 {
 
-    private RadioGroup radioGroup2;
+    private RadioGroup radioGroup3, radioGroup4;
     private Spinner spinner2, spinner3;
     private TextView amount2;
     private EditText amount2Edit;
@@ -31,11 +31,27 @@ public class Recurring extends Activity implements AdapterView.OnItemSelectedLis
         setContentView(R.layout.recurring);
 
         /* Initialize Radio Group and attach click handler */
-        radioGroup2 = (RadioGroup) findViewById(R.id.radioGroup2);
-        radioGroup2.clearCheck();
+        radioGroup3 = (RadioGroup) findViewById(R.id.radioGroup3);
+        radioGroup3.clearCheck();
+
+        radioGroup4 = (RadioGroup) findViewById(R.id.radioGroup4);
+        radioGroup4.clearCheck();
 
         /* Attach CheckedChangeListener to radio group */
-        radioGroup2.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
+        radioGroup3.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
+        {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId)
+            {
+                RadioButton rb = (RadioButton) group.findViewById(checkedId);
+                if (null != rb && checkedId > -1)
+                {
+                    Toast.makeText(Recurring.this, rb.getText(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        radioGroup4.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
         {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId)
@@ -106,13 +122,17 @@ public class Recurring extends Activity implements AdapterView.OnItemSelectedLis
     public void onClear(View v)
     {
         /* Clears all selected radio buttons to default */
-        radioGroup2.clearCheck();
+        radioGroup3.clearCheck();
+        radioGroup4.clearCheck();
     }
 
     public void onSubmit(View v)
     {
-        RadioButton rb = (RadioButton) radioGroup2.findViewById(radioGroup2.getCheckedRadioButtonId());
-        Toast.makeText(Recurring.this, rb.getText(), Toast.LENGTH_SHORT).show();
+        RadioButton rb1 = (RadioButton) radioGroup3.findViewById(radioGroup3.getCheckedRadioButtonId());
+        Toast.makeText(Recurring.this, rb1.getText(), Toast.LENGTH_SHORT).show();
+
+        RadioButton rb2 = (RadioButton) radioGroup4.findViewById(radioGroup4.getCheckedRadioButtonId());
+        Toast.makeText(Recurring.this, rb2.getText(), Toast.LENGTH_SHORT).show();
     }
 
     // click to corresponding activity
@@ -127,9 +147,17 @@ public class Recurring extends Activity implements AdapterView.OnItemSelectedLis
         {
             //do stuff
         }
+        if (view.getId() == R.id.checkingRadioButton2)
+        {
+            // do stuff
+        }
+        if (view.getId() == R.id.savingsRadioButton2)
+        {
+            //do stuff
+        }
         if (view.getId() == R.id.recurringSubmit)
         {
-            // submit to database
+            //do stuff
         }
     }
 }
