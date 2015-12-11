@@ -15,8 +15,6 @@ import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 
-import java.util.Calendar;
-
 import budgetkeeper.db.CheckingSource;
 import budgetkeeper.db.SavingSource;
 
@@ -30,7 +28,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener
     CheckingSource checkingsource;
     SavingSource savingsource;
     //calendar
-    Calendar cal=Calendar.getInstance();
+    //Calendar cal=Calendar.getInstance();
 
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.

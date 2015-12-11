@@ -1,28 +1,31 @@
 package chad.budgetkeeper;
 
-import java.util.Calendar;
+import java.text.NumberFormat;
 
 public class Checking {
-    private boolean ispositive;
-    private int amount;
+    private float amount;
     private String name;
-    private int date;
+    //private int date;
     private long id;
-    Calendar cal=Calendar.getInstance();
+    private int isdebit;
+    //Calendar cal=Calendar.getInstance();
 
+    public Checking(){
 
-    public Checking(String name, int amount){
+    }
+
+    public Checking(String name, int isdebit, float amount){
         setName(name);
         setAmount(amount);
-        setDate();
-        setIsPositive(amount);
+        //setDate();
+        setIsDebit(isdebit);
     }
 
-    public boolean getIsPositive(){
-        return(ispositive);
+    public int getIsDebit(){
+        return(isdebit);
     }
 
-    public int getAmount(){
+    public float getAmount(){
         return(amount);
     }
 
@@ -30,24 +33,24 @@ public class Checking {
         return(name);
     }
 
-    public int getDate(){
-        return(date);
-    }
+    //public int getDate(){
+        //return(date);
+    //}
 
     public long getId(){
         return(id);
     }
 
-    public void setIsPositive(int amount){
-        if(amount>=0){
-            this.ispositive=true;
+    public void setIsDebit(int isdebit){
+        if(isdebit==1){
+            this.isdebit=1;
         }
-        else if(amount<0){
-            this.ispositive=false;
+        else if(isdebit==0){
+            this.isdebit=0;
         }
     }
 
-    public void setAmount(int amount){
+    public void setAmount(float amount){
         this.amount=amount;
     }
 
@@ -55,12 +58,22 @@ public class Checking {
         this.name=name;
     }
 
-    public void setDate(){
-        this.date=cal.get(Calendar.DATE);
-    }
+    //public void setDate(){
+        //this.date=cal.get(Calendar.DATE);
+    //}
+
+    //public void setDate(int date){
+        //this.date=date;
+    //}
 
     public void setId(long id){
         this.id=id;
+    }
+
+    @Override
+    public String toString(){
+        NumberFormat nf = NumberFormat.getCurrencyInstance().getCurrencyInstance();
+        return name + "\n(" + nf.format(amount) + ")";
     }
 
 }

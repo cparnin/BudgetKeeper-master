@@ -56,22 +56,13 @@
 
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_height="154dp"
         android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/creditList"
+        <ListView
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:paddingRight="20dp"
-            android:text="List goes here (scrollView)"
-            android:textColor="#ffffffff"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:scrollbars = "vertical"/>
+            android:layout_height="wrap_content"
+            android:id="@+id/creditList" />
     </LinearLayout>
 
     <LinearLayout
@@ -106,23 +97,14 @@
 
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="horizontal">
+        android:layout_height="143dp"
+        android:orientation="horizontal"
+        android:layout_weight="0.38">
 
-        <TextView
-            android:id="@+id/debitList"
+        <ListView
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:paddingRight="20dp"
-            android:text="List goes here (scrollView)"
-            android:textColor="#ffffffff"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:phoneNumber="false"
-            android:scrollbars = "vertical"/>
+            android:layout_height="wrap_content"
+            android:id="@+id/debitList" />
     </LinearLayout>
 
 </LinearLayout>

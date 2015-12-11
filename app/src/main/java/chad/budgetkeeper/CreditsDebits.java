@@ -2,6 +2,7 @@ package chad.budgetkeeper;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -13,15 +14,20 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import budgetkeeper.db.CheckingSource;
+
 public class CreditsDebits extends Activity implements AdapterView.OnItemSelectedListener,
                                                         View.OnClickListener
 {
-
+    String item;
     private RadioGroup radioGroup1, radioGroup2;
     private Spinner spinner1;
     private TextView amount1;
     private EditText amount1Edit;
     private Button submitBtn1;
+    private boolean ischecking;
+    private int isdebit;
+    public static final String LOGTAG="BUDGETKEEPER";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) throws NumberFormatException
@@ -32,33 +38,53 @@ public class CreditsDebits extends Activity implements AdapterView.OnItemSelecte
         /* Initialize Radio Groups and attach click handler */
         radioGroup1 = (RadioGroup) findViewById(R.id.radioGroup1);
         radioGroup1.clearCheck();
-
         radioGroup2 = (RadioGroup) findViewById(R.id.radioGroup2);
         radioGroup2.clearCheck();
+        final RadioButton debit = (RadioButton) findViewById(R.id.debitRadioButton1);
+        final RadioButton credit = (RadioButton) findViewById(R.id.creditRadioButton1);
+        final RadioButton check = (RadioButton) findViewById(R.id.checkingRadioButton1);
+        final RadioButton save = (RadioButton) findViewById(R.id.savingsRadioButton1);
 
         /* Attach CheckedChangeListener to radio group */
-        radioGroup1.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
-        {
+        radioGroup1.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId)
-            {
-                RadioButton rb = (RadioButton) group.findViewById(checkedId);
-                if (null != rb && checkedId > -1)
-                {
-                    Toast.makeText(CreditsDebits.this, rb.getText(), Toast.LENGTH_SHORT).show();
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                RadioButton rb1 = (RadioButton) group.findViewById(checkedId);
+                if (null != rb1 && checkedId > -1) {
+                    Toast.makeText(CreditsDebits.this, rb1.getText(), Toast.LENGTH_SHORT).show();
                 }
+                if (rb1.getId() == credit.getId()){
+                    isdebit = 0;
+                Log.i(LOGTAG, "rb1 credit");
             }
-        });
+
+            else if(rb1.getId()==debit.getId())
+            {
+                isdebit = 1;
+                Log.i(LOGTAG, "rb1 debit");
+            }
+        }
+    });
 
         radioGroup2.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
         {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId)
             {
-                RadioButton rb = (RadioButton) group.findViewById(checkedId);
-                if (null != rb && checkedId > -1)
+                RadioButton rb2 = (RadioButton) group.findViewById(checkedId);
+                if (null != rb2 && checkedId > -1)
                 {
-                    Toast.makeText(CreditsDebits.this, rb.getText(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CreditsDebits.this, rb2.getText(), Toast.LENGTH_SHORT).show();
+                }
+                if(rb2.getId()==check.getId())
+                {
+                    ischecking=true;
+                    Log.i(LOGTAG, "rb2 checking");
+                }
+                else if(rb2.getId()==save.getId())
+                {
+                    ischecking=false;
+                    Log.i(LOGTAG, "rb2 saving");
                 }
             }
         });
@@ -97,7 +123,7 @@ public class CreditsDebits extends Activity implements AdapterView.OnItemSelecte
                                int pos, long id)
     {
         // On selecting a spinner item
-        String item = parent.getItemAtPosition(pos).toString();
+        item = parent.getItemAtPosition(pos).toString();
 
         // Showing selected spinner item
         Toast.makeText(parent.getContext(), "Selected: " + item, Toast.LENGTH_SHORT).show();
@@ -129,7 +155,7 @@ public class CreditsDebits extends Activity implements AdapterView.OnItemSelecte
     // click to corresponding activity
     public void onClick(View view)
     {
-
+        Log.i(LOGTAG, "in credits/debits onclick" );
         if (view.getId() == R.id.creditRadioButton1)
         {
            // do stuff
@@ -148,7 +174,20 @@ public class CreditsDebits extends Activity implements AdapterView.OnItemSelecte
         }
         if (view.getId() == R.id.creditDebitSubmit)
         {
+            Float uhoh = Float.parseFloat(amount1Edit.getText().toString());
+            Log.i(LOGTAG, "in submit");
+
             //do stuff
+            //no you
+            //need to add checks to make sure everything is filled out
+            if(ischecking){
+                Log.i(LOGTAG, "in ischecking");
+                CheckingSource source = new CheckingSource(this);
+                Checking submitchecking = new Checking(item, isdebit, uhoh);
+                source.open();
+                source.create(submitchecking);
+                source.close();
+            }
         }
     }
 

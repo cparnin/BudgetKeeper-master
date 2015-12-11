@@ -12,17 +12,17 @@ public class SavingDbHelper extends SQLiteOpenHelper {
     private static final String DATAABASE_NAME = "saving.db";
     private static final int DATABASE_VERSION = 1;
 
-    public static final String SAVING ="Saving";
-    public static final String COLUMN_ID = "SavingId";
-    public static final String COLUMN_NAME = "Name";
-    public static final String COLUMN_DATE = "Date";
-    public static final String COLUMN_Amount= "Amount";
-    public static final String COLUMN_ISPOSITIVE="IsPositive";
+    public static final String SAVING ="saving";
+    public static final String COLUMN_ID = "savingid";
+    public static final String COLUMN_NAME = "name";
+    public static final String COLUMN_DATE = "date";
+    public static final String COLUMN_Amount= "amount";
+    public static final String COLUMN_ISDEBIT="isdebit";
 
     private static final String TABLE_CREATE =
             "CREATE TABLE " + SAVING + " (" +
                     COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                    COLUMN_ISPOSITIVE + " INTEGER," +
+                    COLUMN_ISDEBIT + " INTEGER," +
                     COLUMN_NAME + " TEXT, " +
                     COLUMN_DATE + " REAL, " +
                     COLUMN_Amount + " REAL " +
