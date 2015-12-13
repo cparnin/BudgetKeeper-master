@@ -151,7 +151,7 @@
             android:textColor="#ff333333"
             android:textSize="20sp"
             android:textStyle="bold"
-            />
+            android:clickable="true"/>
 
         <Button
             android:id="@+id/recurring"
