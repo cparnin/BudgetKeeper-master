@@ -139,6 +139,7 @@ public class Recurring extends Activity implements AdapterView.OnItemSelectedLis
     public void onClick(View view)
     {
 
+        /*
         if (view.getId() == R.id.creditRadioButton2)
         {
             // do stuff
@@ -159,5 +160,6 @@ public class Recurring extends Activity implements AdapterView.OnItemSelectedLis
         {
             //do stuff
         }
+        */
     }
 }

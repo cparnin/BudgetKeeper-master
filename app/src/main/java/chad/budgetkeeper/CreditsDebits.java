@@ -105,14 +105,6 @@ public class CreditsDebits extends Activity implements AdapterView.OnItemSelecte
         // EDIT TEXT FOR AMOUNT
         amount1Edit = (EditText) findViewById(R.id.amountEditText1);
         amount1 = (TextView) findViewById(R.id.amount1);
-        /*
-        // store amount in database
-        try {
-            int Value = Integer.parseInt(amount1.getText().toString());
-        }
-        catch(NumberFormatException ex){
-            throw ex;
-        }*/
 
         submitBtn1 = (Button)findViewById(R.id.creditDebitSubmit);
         submitBtn1.setOnClickListener(this);
@@ -156,6 +148,7 @@ public class CreditsDebits extends Activity implements AdapterView.OnItemSelecte
     public void onClick(View view)
     {
         Log.i(LOGTAG, "in credits/debits onclick" );
+        /*
         if (view.getId() == R.id.creditRadioButton1)
         {
            // do stuff
@@ -172,14 +165,12 @@ public class CreditsDebits extends Activity implements AdapterView.OnItemSelecte
         {
             //do stuff
         }
+        */
         if (view.getId() == R.id.creditDebitSubmit)
         {
             Float uhoh = Float.parseFloat(amount1Edit.getText().toString());
             Log.i(LOGTAG, "in submit");
 
-            //do stuff
-            //no you
-            //need to add checks to make sure everything is filled out
             if(ischecking){
                 Log.i(LOGTAG, "in ischecking");
                 CheckingSource source = new CheckingSource(this);
