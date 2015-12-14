@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import budgetkeeper.db.CheckingSource;
+import budgetkeeper.db.SavingSource;
 
 public class CreditsDebits extends Activity implements AdapterView.OnItemSelectedListener,
                                                         View.OnClickListener
@@ -173,11 +174,19 @@ public class CreditsDebits extends Activity implements AdapterView.OnItemSelecte
 
             if(ischecking){
                 Log.i(LOGTAG, "in ischecking");
-                CheckingSource source = new CheckingSource(this);
+                CheckingSource checksource = new CheckingSource(this);
                 Checking submitchecking = new Checking(item, isdebit, uhoh);
-                source.open();
-                source.create(submitchecking);
-                source.close();
+                checksource.open();
+                checksource.create(submitchecking);
+                checksource.close();
+            }
+            else if(!ischecking){
+                Log.i(LOGTAG, "in issaving");
+                SavingSource savesource = new SavingSource(this);
+                Saving submitsaving = new Saving(item, isdebit, uhoh);
+                savesource.open();
+                savesource.create(submitsaving);
+                savesource.close();
             }
         }
     }

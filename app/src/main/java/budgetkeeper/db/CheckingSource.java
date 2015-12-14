@@ -52,26 +52,80 @@ public class CheckingSource {
         return(checking);
     }
 
-    public List<Checking> findAll(){
+    public List<Checking> allChecking(){
         Log.i(LOGTAG, "in findall");
-        List<Checking> checkings = new ArrayList<Checking>();
+        List<Checking> allcheckings = new ArrayList<Checking>();
         Log.i(LOGTAG, "allocated list checkings");
-        Cursor cursor = checkingdb.query(CheckingDbHelper.CHECKING,allColumns,null,null,null,null,null);
+        Cursor cursor = checkingdb.query(CheckingDbHelper.CHECKING, allColumns, null, null, null, null, null);
         Log.i(LOGTAG, "initiated cursor");
 
         Log.i(LOGTAG, "Returned " + cursor.getCount() + " rows");
-        if(cursor.getCount()>0){
-            while(cursor.moveToNext()){
+        if (cursor.getCount() > 0) {
+            while (cursor.moveToNext()) {
                 Checking checking = new Checking();
                 checking.setId(cursor.getLong(cursor.getColumnIndex(CheckingDbHelper.COLUMN_ID)));
                 checking.setIsDebit(cursor.getInt(cursor.getColumnIndex(CheckingDbHelper.COLUMN_ISDEBIT)));
                 checking.setName(cursor.getString(cursor.getColumnIndex(CheckingDbHelper.COLUMN_NAME)));
                 //checking.setDate(cursor.getInt(cursor.getColumnIndex(CheckingDbHelper.COLUMN_DATE)));
                 checking.setAmount(cursor.getFloat(cursor.getColumnIndex(CheckingDbHelper.COLUMN_AMOUNT)));
-                checkings.add(checking);
+                allcheckings.add(checking);
             }
         }
-        return(checkings);
+        cursor.close();
+        return (allcheckings);
+    }
+
+
+
+
+    public List<Checking> checkingDebit() {
+        Log.i(LOGTAG, "in findall");
+        List<Checking> debitcheckings = new ArrayList<Checking>();
+        Log.i(LOGTAG, "allocated list checkings");
+        Cursor cursor = checkingdb.query(CheckingDbHelper.CHECKING, allColumns, null, null, null, null, null);
+        Log.i(LOGTAG, "initiated cursor");
+
+        Log.i(LOGTAG, "Returned " + cursor.getCount() + " rows");
+        if (cursor.getCount() > 0) {
+            while (cursor.moveToNext()) {
+                Checking checking = new Checking();
+                checking.setId(cursor.getLong(cursor.getColumnIndex(CheckingDbHelper.COLUMN_ID)));
+                checking.setIsDebit(cursor.getInt(cursor.getColumnIndex(CheckingDbHelper.COLUMN_ISDEBIT)));
+                checking.setName(cursor.getString(cursor.getColumnIndex(CheckingDbHelper.COLUMN_NAME)));
+                //checking.setDate(cursor.getInt(cursor.getColumnIndex(CheckingDbHelper.COLUMN_DATE)));
+                checking.setAmount(cursor.getFloat(cursor.getColumnIndex(CheckingDbHelper.COLUMN_AMOUNT)));
+                if (checking.getIsDebit() == 1) {
+                    debitcheckings.add(checking);
+                }
+            }
+        }
+        cursor.close();
+        return (debitcheckings);
+    }
+
+    public List<Checking> checkingCredit() {
+        Log.i(LOGTAG, "in checkingcredit");
+        List<Checking> creditcheckings = new ArrayList<Checking>();
+        Log.i(LOGTAG, "allocated list checkings");
+        Cursor cursor = checkingdb.query(CheckingDbHelper.CHECKING, allColumns, null, null, null, null, null);
+        Log.i(LOGTAG, "initiated cursor");
+
+        Log.i(LOGTAG, "Returned " + cursor.getCount() + " rows");
+        if (cursor.getCount() > 0) {
+            while (cursor.moveToNext()) {
+                Checking checking = new Checking();
+                checking.setId(cursor.getLong(cursor.getColumnIndex(CheckingDbHelper.COLUMN_ID)));
+                checking.setIsDebit(cursor.getInt(cursor.getColumnIndex(CheckingDbHelper.COLUMN_ISDEBIT)));
+                checking.setName(cursor.getString(cursor.getColumnIndex(CheckingDbHelper.COLUMN_NAME)));
+                //checking.setDate(cursor.getInt(cursor.getColumnIndex(CheckingDbHelper.COLUMN_DATE)));
+                checking.setAmount(cursor.getFloat(cursor.getColumnIndex(CheckingDbHelper.COLUMN_AMOUNT)));
+                if (checking.getIsDebit() == 0) {
+                    creditcheckings.add(checking);
+                }
+            }
+        }
+        cursor.close();
+        return (creditcheckings);
     }
 
 }

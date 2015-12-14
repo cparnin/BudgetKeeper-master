@@ -1,27 +1,32 @@
 package chad.budgetkeeper;
 
-import java.util.Calendar;
+import java.text.NumberFormat;
 
 public class Saving {
-    private boolean ispositive;
-    private int amount;
+    private int isdebit;
+    private float amount;
     private String name;
-    private int date;
-    Calendar cal=Calendar.getInstance();
+    private long id;
+    //private int date;
+    //Calendar cal=Calendar.getInstance();
 
 
-    public Saving(String name, int amount){
+    public Saving(){
+
+    }
+
+    public Saving(String name,int isdebit, float amount){
         setName(name);
         setAmount(amount);
-        setDate();
-        setIsPositive(amount);
+        //setDate();
+        setIsDebit(isdebit);
     }
 
-    public boolean getIsPositive(){
-        return(ispositive);
+    public int getIsDebit(){
+        return(isdebit);
     }
 
-    public int getAmount(){
+    public float getAmount(){
         return(amount);
     }
 
@@ -29,20 +34,24 @@ public class Saving {
         return(name);
     }
 
-    public int getDate(){
-        return(date);
+    public long getId(){
+        return(id);
     }
 
-    public void setIsPositive(int amount){
-        if(amount>=0){
-            this.ispositive=true;
+    //public int getDate(){
+        //return(date);
+    //}
+
+    public void setIsDebit(int isdebit){
+        if(isdebit==1){
+            this.isdebit=1;
         }
-        else if(amount<0){
-            this.ispositive=false;
+        else if(isdebit==0){
+            this.isdebit=0;
         }
     }
 
-    public void setAmount(int amount){
+    public void setAmount(float amount){
         this.amount=amount;
     }
 
@@ -50,8 +59,18 @@ public class Saving {
         this.name=name;
     }
 
-    public void setDate(){
-        this.date=cal.get(Calendar.DATE);
+    public void setId(long id){
+        this.id=id;
+    }
+
+    //public void setDate(){
+        //this.date=cal.get(Calendar.DATE);
+    //}
+
+    @Override
+    public String toString(){
+        NumberFormat nf = NumberFormat.getCurrencyInstance().getCurrencyInstance();
+        return name + "\n(" + nf.format(amount) + ")";
     }
 
 }

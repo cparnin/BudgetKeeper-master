@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,6 +15,9 @@ import android.widget.TextView;
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
+
+import java.text.NumberFormat;
+import java.util.List;
 
 import budgetkeeper.db.CheckingSource;
 import budgetkeeper.db.SavingSource;
@@ -27,6 +31,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener
     //data sources for db
     CheckingSource checkingsource;
     SavingSource savingsource;
+    static final String LOGCAT = "BUDGETKEEPER";
     //calendar
     //Calendar cal=Calendar.getInstance();
 
@@ -75,11 +80,43 @@ public class MainActivity extends AppCompatActivity implements OnClickListener
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
-
+        float checkamount=0;
+        float saveamount=0;
         //instancing data source for db
+
+        NumberFormat formatter= NumberFormat.getCurrencyInstance();
         checkingsource = new CheckingSource(this);
         savingsource = new SavingSource(this);
+        checkingsource.open();
+        savingsource.open();
+        List<Checking> checkinglist = checkingsource.allChecking();
+        Log.i(LOGCAT,"checkinglist");
+        for(int i =0;i<checkinglist.size();i++){
+            if(checkinglist.get(i).getIsDebit()==0) {
+                checkamount += checkinglist.get(i).getAmount();
+            }
+            else if(checkinglist.get(i).getIsDebit()==1){
+                checkamount = checkamount - checkinglist.get(i).getAmount();
+            }
+        }
+        String checkstring=formatter.format(checkamount);
+        checkingBal.setText(checkstring);
 
+
+        List<Saving> savinglist = savingsource.savingAll();
+        Log.i(LOGCAT, "Savinglist");
+        for(int j = 0;j<savinglist.size();j++) {
+            if(savinglist.get(j).getIsDebit()==0) {
+                saveamount += savinglist.get(j).getAmount();
+            }
+            else if(savinglist.get(j).getIsDebit()==1) {
+                saveamount = saveamount-savinglist.get(j).getAmount();
+            }
+        }
+        String savestring = formatter.format(saveamount);
+        savingsBal.setText(savestring);
+        checkingsource.close();
+        savingsource.close();
     }
 
     @Override
