@@ -95,7 +95,7 @@
             android:background="#02ffeb"
             android:gravity="center"
             android:padding="5dp"
-            android:text="Send data in an email"
+            android:text="Share"
             android:textColor="#ff333333"
             android:textSize="20sp"
             android:textStyle="bold" />

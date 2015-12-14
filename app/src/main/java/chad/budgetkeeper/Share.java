@@ -46,7 +46,7 @@ public class Share extends Activity
         emailIntent.putExtra(Intent.EXTRA_TEXT, "Email message goes here");
 
         try {
-            startActivity(Intent.createChooser(emailIntent, "Send mail..."));
+            startActivity(Intent.createChooser(emailIntent, "Share with..."));
             finish();
             Log.i("Finished...", "");
         }

@@ -187,14 +187,12 @@ public class Recurring extends Activity implements AdapterView.OnItemSelectedLis
         {
             //do stuff
         }
+        */
         if (view.getId() == R.id.recurringSubmit)
         {
             Float uhoh = Float.parseFloat(amount2Edit.getText().toString());
             Log.i(LOGTAG, "in submit");
 
-            //do stuff
-            //no you
-            //need to add checks to make sure everything is filled out
             if(ischecking){
                 Log.i(LOGTAG, "in ischecking");
                 CheckingSource checksource = new CheckingSource(this);
@@ -212,6 +210,5 @@ public class Recurring extends Activity implements AdapterView.OnItemSelectedLis
                 savesource.close();
             }
         }
-        */
     }
 }
